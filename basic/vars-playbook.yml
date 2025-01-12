@@ -1,0 +1,11 @@
+---
+- name: Vars playbook
+  hosts: all
+  vars: 
+    var1: "VAR1"
+    var2: "VAR2"
+  tasks:
+    - name: Print vars
+      ansible.builtin.debug:
+        msg: "var1 is {{ var1 }}, var2 is {{ var2 }}"
+      verbosity: 2

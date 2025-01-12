@@ -1,0 +1,23 @@
+---
+- name: Multi lines
+  hosts: all
+  vars:
+    var1: |-
+      test Multiple lines
+      here the second
+      the third
+    var2: >-
+      only one line
+      the second
+      and the third
+
+  tasks:
+
+    - name: test lines 1
+      ansible.builtin.debug:
+        msg: "{{ var1.split('\n') }}"
+
+
+    - name: test lines 2
+      ansible.builtin.debug:
+        var: var2

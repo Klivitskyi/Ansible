@@ -1,0 +1,17 @@
+---
+- name: Waiting
+  hosts: all
+  vars:
+    wait_seconds: 10
+  tasks:
+    - name: Start
+      ansible.builtin.debug:
+        msg: "Start"
+
+    - name: Wait {{ wait_seconds }}
+      ansible.builtin.pause:
+        seconds: "{{ wait_seconds }}"
+
+    - name: End
+      ansible.builtin.debug:
+        msg: "End"
