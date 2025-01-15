@@ -1,0 +1,8 @@
+---
+- name: timestamp
+  hosts: stage
+
+  tasks:
+    - name: time
+      debug:
+        msg: "{{ lookup('pipe', 'date +%Y-%m-%d@%H:%M:%S') }}"

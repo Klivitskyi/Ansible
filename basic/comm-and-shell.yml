@@ -1,0 +1,30 @@
+---
+- name: test command and shell
+  hosts: all
+  vars:
+    REMOVE_VAR: "test.txt; rm test.txt; ls test.txt"
+
+  tasks:
+    - name: craete file via shell
+      shell: echo "Test" > test.txt
+      register: create_file
+
+    # - name: cat over command
+    #   command: cat {{ REMOVE_VAR }}
+    #   register: command_cat
+
+    - name: cat over ssh
+      shell: cat {{ REMOVE_VAR }}
+      register: shell_cat
+
+    - name: Show output of file creation
+      debug:
+        msg: "{{ create_file.stdout }}"
+
+    # - name: Show output of command cat
+    #   debug:
+    #     msg: "{{ command_cat.stdout }}"
+
+    - name: Show output of shell rm
+      debug:
+        msg: "{{ shell_cat.stdout }}"

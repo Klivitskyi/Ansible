@@ -1,0 +1,12 @@
+---
+- name: Copy file
+  hosts: stage
+  become: yes
+  tasks:
+    - name: copy conf file
+      copy:
+        src: config.txt
+        dest: /etc/config.txt
+        owner: testadmin
+        group: testadmin
+        mode: '0644'

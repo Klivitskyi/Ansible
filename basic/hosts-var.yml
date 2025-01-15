@@ -1,0 +1,8 @@
+---
+- name: test hosts var
+  hosts: "{{ HOSTS }}"
+
+  tasks:
+    - name: test
+      debug:
+        msg: "Host: {{ inventory_hostname }}"
