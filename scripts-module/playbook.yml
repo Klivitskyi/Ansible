@@ -1,0 +1,25 @@
+---
+- name: Test scripts
+  hosts: all
+  gather_facts: false
+
+  tasks:
+
+    - name: Python script
+      script:
+        cmd: script.py
+      register: PYTHON_ROW
+
+    - name: Bash script
+      script:
+        cmd: script.sh
+      register: BASH_ROW
+
+    - name: show var py row
+      debug: 
+        var: PYTHON_ROW
+        verbosity: 2
+    - name: show var bash row
+      debug:
+        var: BASH_ROW
+        verbosity: 2

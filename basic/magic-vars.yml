@@ -1,0 +1,32 @@
+---
+- name: Vars
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: VARs
+      debug:
+        var: "{{ item }}"
+      loop:
+        # Path to the Ansible configuration file being used (e.g., ansible.cfg)
+        - ansible_config_file
+        # Directory of the playbook being executed
+        - playbook_dir
+        # Path to the inventory file in use
+        - inventory_file
+        # Directory containing the inventory file
+        - inventory_dir
+        # Returns true/false if Ansible is running in check mode (dry-run)
+        - ansible_check_mode
+        # Returns true/false if Ansible is running in diff mode (shows configuration changes)
+        - ansible_diff_mode
+        # Number of parallel forks used to execute tasks
+        - ansible_forks
+        # Current verbosity level of Ansible (set via -v flags)
+        - ansible_varbosity
+        # The inventory hostname for the current host
+        - inventory_hostname
+        # List of all hosts being targeted by the current play
+        - ansible_play_hosts
+        # Current version of Ansible being used
+        - ansible_version

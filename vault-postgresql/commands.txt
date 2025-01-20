@@ -1,0 +1,6 @@
+ansible-vault create file
+
+ansible-vault encrypt/decrypt file
+
+
+

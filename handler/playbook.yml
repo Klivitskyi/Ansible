@@ -1,0 +1,21 @@
+---
+- name: Nginx server
+  hosts: all
+  tasks:
+
+    - name: Copy index.html
+      copy:
+        src: index.html
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
+      notify: Restart Nginx
+      become: true
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+      become: true

@@ -1,0 +1,42 @@
+---
+- name: Manage PSQL
+  hosts: all
+  become: true
+  vars_files:
+    - db-secrets.yml
+
+  tasks:
+    - name: Install PSQL client
+      apt:
+        name: postgresql-client
+        state: present
+   
+    - name: Install pip3
+      apt:
+        name: python3-pip
+        state: present
+
+    - name: Install psycopg2
+      pip:
+        name: psycopg2-binary
+        state: present
+
+    - name: Test connection
+      postgresql_db:
+        login_host: "{{ db_host }}"
+        login_user: "{{ db_user }}"
+        login_password: "{{ db_password }}"
+        name: "{{ db_name }}"
+        state: present
+
+    - name: Create table
+      postgresql_query:
+        login_host: "{{ db_host }}"
+        login_user: "{{ db_user }}"
+        login_password: "{{ db_password }}"
+        db: "{{ db_name }}"
+        query: |
+          CREATE TABLE IF NOT EXISTS test_table (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(255) NOT NULL
+          );
