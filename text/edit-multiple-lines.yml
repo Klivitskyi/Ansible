@@ -1,0 +1,35 @@
+---
+- name: Edit multiple lines
+  hosts: all
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: insert text
+      blockinfile:
+        path: /etc/test.conf
+        block: |
+          Test1 = true
+          Test2 = false
+        marker: "# {mark} TEST CONF"
+        state: present
+        create: yes
+      
+    - name: insert text2
+      blockinfile:
+        path: /etc/test2.conf
+        block: |
+          "Name: {{ item.name }} and state: {{ item.state }}"
+        marker: "# {mark} TEST CONF {{ item.name }}"
+        state: present
+        create: yes
+      loop:
+        - {name: N1, state: true}
+        - {name: N2, state: false}
+        - {name: N3, state: false}
+
+    - name: delete N2
+      blockinfile:
+        path: /etc/test2.conf
+        marker: "# {mark} TEST CONF N1"
+        state: absent

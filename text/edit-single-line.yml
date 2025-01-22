@@ -1,0 +1,16 @@
+---
+- name: Edit single line
+  hosts: all
+  gather_facts: false 
+  become: true
+
+  tasks:
+    - name: Edit line in sshd_connf
+      lineinfile:
+        state: present #absent
+        dest: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+      # insertbefore: '^#PasswordAuthentication'
+        insertafter: '^#PasswordAuthentication'
+        line: 'PasswordAuthentication yes'
+        validate: 'sshd -t -f %s'

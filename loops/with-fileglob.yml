@@ -1,0 +1,11 @@
+---
+- name: Test with_fileglob
+  hosts: all
+
+  tasks:
+    - name: with_fileglob
+      copy:
+        src: "{{ item }}"
+        dest: /tmp/
+      with_fileglob:
+        - /test/*.txt

@@ -1,0 +1,11 @@
+---
+- name: Test with_dict
+  hosts: all
+
+  tasks:
+    - name: dict
+      debug:
+        msg: "Key {{ item.key }}: {{ item.value }}"
+      with_dict:
+        Key1: 'Value'
+        Key2: 'Value2'

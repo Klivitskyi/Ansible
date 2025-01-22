@@ -1,0 +1,14 @@
+---
+- name: Reboot host
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Reboot
+      reboot:
+        reboot_timeout: 300
+        msg: "Reboot initiated by Ansible"
+        connect_timeout: 5
+        pre_reboot_delay: 20
+        post_reboot_delay: 10
+        test_command: whoami

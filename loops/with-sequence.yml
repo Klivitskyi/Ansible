@@ -1,0 +1,9 @@
+---
+- name: Test with_sequence
+  hosts: all
+
+  tasks:
+    - name: with_sequence
+      debug:
+        msg: '{{ item }}'
+      with_sequence: start=10 end=5 stride=-1
